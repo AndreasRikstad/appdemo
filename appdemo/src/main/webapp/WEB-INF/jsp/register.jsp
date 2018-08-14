@@ -31,7 +31,7 @@
 						size="28" id="name" /></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><sf:errors path="name"/></td>
+				<td colspan="2" align="center"><font color="red"><sf:errors path="name"/></font></td>
 			</tr>
 
 			<tr>
@@ -41,7 +41,7 @@
 			</tr>
 
 			<tr>
-				<td colspan="2" align="center"><sf:errors path="lastName"/></td>
+				<td colspan="2" align="center"><font color="red"><sf:errors path="lastName"/></font></td>
 			</tr>
 
 			<tr>
@@ -49,7 +49,7 @@
 				<td width="270" align="left"><sf:input path="email" size="28" /></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><sf:errors path="email"/></td>
+				<td colspan="2" align="center"><font color="red"><sf:errors path="email"/></font></td>
 			</tr>
 
 			<tr>
@@ -57,7 +57,7 @@
 				<td width="270" align="left"><sf:password path="password" size="28" /></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><sf:errors path="password"/></td>
+				<td colspan="2" align="center"><font color="red"><sf:errors path="password"/></font></td>
 			</tr>
 
 			<tr>

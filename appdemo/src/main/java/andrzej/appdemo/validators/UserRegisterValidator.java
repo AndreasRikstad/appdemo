@@ -40,6 +40,10 @@ public class UserRegisterValidator implements Validator {
 		
 	}
 	
-	
+	public void validateEmailExist(User user, Errors errors) {
+		if (user != null) {
+			errors.rejectValue("email", "error.userEmailExist");
+		}
+	}
 
 }

@@ -13,5 +13,5 @@ public class MainPageController {
 	public String showMainPage() {
 		return "index";
 	}
-
+	
 }
