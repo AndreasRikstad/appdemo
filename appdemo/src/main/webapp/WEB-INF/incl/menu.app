@@ -10,6 +10,7 @@
 			<a href="/register"><s:message code="menu.register"/></a>&nbsp;
 		</sec:authorize>
 		<sec:authorize access="isAuthenticated()">
+			<a href="/profil"><s:message code="menu.profil"/></a>
 			<a href="/logout"><s:message code="menu.logout"/></a>	
 		</sec:authorize>
 		</td>	
