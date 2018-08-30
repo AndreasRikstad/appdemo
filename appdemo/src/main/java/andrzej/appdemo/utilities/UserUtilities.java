@@ -8,7 +8,6 @@ public class UserUtilities {
 	
 	public static String getLoggedUser() {
 		String username = null;
-		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if(!(auth instanceof AnonymousAuthenticationToken)) {
 			username = auth.getName();

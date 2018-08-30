@@ -54,6 +54,9 @@ public class User {
 	@Transient
 	private int nrRoli;
 	
+	@Transient
+	private String newPassword;
+	
 	
 	//gettery i settery
 	public int getId() {
@@ -109,6 +112,12 @@ public class User {
 	}
 	public void setNrRoli(int nrRoli) {
 		this.nrRoli = nrRoli;
+	}
+	public String getNewPassword() {
+		return newPassword;
+	}
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
 	}
 	
 	
