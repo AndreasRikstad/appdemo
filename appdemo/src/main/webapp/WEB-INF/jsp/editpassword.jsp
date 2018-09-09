@@ -13,7 +13,7 @@
 <body>
 <%@include file="/WEB-INF/incl/menu.app" %>
 
-<h2><s:message code="button.zmianaHasla"/></h2>
+<h2 align="center"><s:message code="button.zmianaHasla"/></h2>
 
 <p align="center">
 		<c:out value="${message }" />

@@ -28,17 +28,19 @@ public class UserServiceImpl implements UserService {
 	public void saveUser(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setActive(1);
-		
 		Role role = roleRepository.findByRole("ROLE_USER");
 		user.setRoles(new HashSet<Role>(Arrays.asList(role)));
-		
 		userRepository.save(user);
-		
 	}
 
 	@Override
 	public void updateUserPassword(String newPassword, String email) {
 		userRepository.updateUserPassword(bCryptPasswordEncoder.encode(newPassword), email);
+	}
+
+	@Override
+	public void updateUserProfile(String newName, String newLastName, String newEmail, int id) {
+		userRepository.updateUserProfile(newName, newLastName, newEmail, id);
 	}
 
 }

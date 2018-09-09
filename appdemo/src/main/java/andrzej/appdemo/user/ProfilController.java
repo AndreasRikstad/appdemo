@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import andrzej.appdemo.utilities.UserUtilities;
 import andrzej.appdemo.validators.ChangePasswordValidator;
+import andrzej.appdemo.validators.EditUserProfileValidator;
 
 @Controller
 public class ProfilController {
@@ -22,7 +23,7 @@ public class ProfilController {
 	private UserService userService;
 	
 	@Autowired
-	MessageSource messageSource;
+	private MessageSource messageSource;
 	
 	@GET
 	@RequestMapping(value = "/profil")
@@ -48,11 +49,8 @@ public class ProfilController {
 	@RequestMapping(value = "/updatepass")
 	public String changeUSerPassword(User user, BindingResult result, Model model, Locale locale) {
 		String returnPage = null;
-		
 		new ChangePasswordValidator().validate(user, result);
-		
 		new ChangePasswordValidator().checkPasswords(user.getNewPassword(), result);
-		
 		if (result.hasErrors()) {
 			returnPage = "editpassword";
 		} else {
@@ -60,7 +58,30 @@ public class ProfilController {
 			returnPage = "editpassword";
 			model.addAttribute("message", messageSource.getMessage("passwordChange.success", null, locale));
 		}
-		
+		return returnPage;
+	}
+	
+	@GET
+	@RequestMapping(value = "/editprofil")
+	public String changeUserData(Model model) {
+		String username = UserUtilities.getLoggedUser();
+		User user = userService.findUserByEmail(username);
+		model.addAttribute("user", user);
+		return "editprofil";
+	}
+	
+	@POST
+	@RequestMapping(value = "/updateprofil")
+	public String changeUserDataAction(User user, BindingResult result, Model model, Locale locale) {
+		String returnPage = null;
+		new EditUserProfileValidator().validate(user, result);
+		if (result.hasErrors()) {
+			returnPage = "editprofil";
+		} else {
+			userService.updateUserProfile(user.getName(), user.getLastName(), user.getEmail(), user.getId());
+			model.addAttribute("message", messageSource.getMessage("profilEdit.success", null, locale));
+			returnPage = "afteredit";
+		}
 		return returnPage;
 	}
 
