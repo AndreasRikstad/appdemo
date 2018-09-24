@@ -10,7 +10,7 @@
 </head>
 <body>
 <%@include file="/WEB-INF/incl/menu.app" %>
-
 <h1><s:message code="menu.adminPage"/></h1>
+<%@include file="/WEB-INF/incl/admenu.app" %>
 </body>
 </html>

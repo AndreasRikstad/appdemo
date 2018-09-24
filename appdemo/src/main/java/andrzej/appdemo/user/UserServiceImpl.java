@@ -42,5 +42,4 @@ public class UserServiceImpl implements UserService {
 	public void updateUserProfile(String newName, String newLastName, String newEmail, int id) {
 		userRepository.updateUserProfile(newName, newLastName, newEmail, id);
 	}
-
 }

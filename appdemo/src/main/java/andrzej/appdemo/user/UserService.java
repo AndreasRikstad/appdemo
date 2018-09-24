@@ -6,5 +6,5 @@ public interface UserService {
 	public void saveUser(User user);
 	public void updateUserPassword(String newPassword, String email);
 	public void updateUserProfile(String newName, String newLastName, String newEmail, int id);
-
+	
 }
