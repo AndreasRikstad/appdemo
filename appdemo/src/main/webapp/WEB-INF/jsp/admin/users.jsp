@@ -10,7 +10,7 @@
 <title><s:message code="menu.users"/></title>
 <script type="text/javascript">
 function changeTrBg(row){
-	row.style.backgroundColor = "lightgray";
+	row.style.backgroundColor = "#e6e6e6";
 }
 
 function defaultTrBg(row){
@@ -21,10 +21,10 @@ function defaultTrBg(row){
 <body>
 <%@include file="/WEB-INF/incl/menu.app" %>
 <h1><s:message code="menu.users"/></h1>
-
+<c:set var="licznik" value="${recordStartCounter }"/>
 <div align="center">
-<table width="1000" border="0" cellpadding="6" cellspacing="0">
-	<tr>
+<table width="1000" border="0" cellpadding="6" cellspacing="2">
+	<tr bgcolor="#ffddcc">
 		<td width="40" align="center"></td>
 		<td width="40" align="center"><b><s:message code="admin.user.id"/></b></td>
 		<td width="200" align="center"><b><s:message code="register.name"/></b></td>
@@ -34,13 +34,13 @@ function defaultTrBg(row){
 		<td width="200" align="center"><b><s:message code="profil.rola"/></b></td>
 	</tr>
 	<c:forEach var="u" items="${userList }">
-		
+		<c:set var="licznik" value="${licznik+1}"/>
 		<tr onmouseover="changeTrBg(this)" onmouseout="defaultTrBg(this)">
-			<td align="right"><c:out value="${count }"/></td>
-			<td align="right"><c:out value="${u.id }" /></td>
-			<td align="left"><c:out value="${u.name }" /></td>
-			<td align="left"><c:out value="${u.lastName }" /></td>
-			<td align="center"><c:out value="${u.email }" /></td>
+			<td align="right"><c:out value="${licznik }"/></td>
+			<td align="right"><a href="edit/${u.id }"><c:out value="${u.id }" /></a></td>
+			<td align="left"><a href="edit/${u.id }"><c:out value="${u.name }" /></a></td>
+			<td align="left"><a href="edit/${u.id }"><c:out value="${u.lastName }" /></a></td>
+			<td align="center"><a href="edit/${u.id }"><c:out value="${u.email }" /></a></td>
 			<td align="center">
 				<c:choose>
 					<c:when test="${u.active == 1 }">
@@ -64,8 +64,11 @@ function defaultTrBg(row){
 		</tr>
 	</c:forEach>
 </table>
-<table width="1000" border="0" cellpadding="6" cellspacing="0">
+<table width="1000" border="0" cellpadding="6" cellspacing="0" bgcolor="#ffddcc">
 	<tr>
+		<td width="300" align="left">
+			<s:message code="info.page"/> ${currentPage} <s:message code="info.from"/> ${totalPages}
+		</td>
 		<td align="right">
 			
 			<c:if test="${currentPage > 1}">
