@@ -8,6 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css" />
 <title><s:message code="menu.register"/></title>
 </head>
 <body>
@@ -62,8 +63,8 @@
 
 			<tr>
 				<td colspan="2" align="center" bgcolor="#fff">
-					<input type="submit" value="<s:message code="button.register"/>" />
-					<input type="button" value="<s:message code="button.cancel"/>" 
+					<input type="submit" value="<s:message code="button.register"/>" class="formbutton"/>
+					<input type="button" value="<s:message code="button.cancel"/>" class="formbutton" 
 						onclick="window.location.href='${pageContext.request.contextPath}/'"/>
 				</td>
 			</tr>

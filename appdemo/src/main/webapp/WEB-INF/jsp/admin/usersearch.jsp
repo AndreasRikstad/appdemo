@@ -56,10 +56,10 @@ function startSerach(){
 		<c:set var="licznik" value="${licznik+1}"/>
 		<tr onmouseover="changeTrBg(this)" onmouseout="defaultTrBg(this)">
 			<td align="right"><c:out value="${licznik }"/></td>
-			<td align="right"><a href="edit/${u.id }"><c:out value="${u.id }" /></a></td>
-			<td align="left"><a href="edit/${u.id }"><c:out value="${u.name }" /></a></td>
-			<td align="left"><a href="edit/${u.id }"><c:out value="${u.lastName }" /></a></td>
-			<td align="center"><a href="edit/${u.id }"><c:out value="${u.email }" /></a></td>
+			<td align="right"><a href="../edit/${u.id }"><c:out value="${u.id }" /></a></td>
+			<td align="left"><a href="../edit/${u.id }"><c:out value="${u.name }" /></a></td>
+			<td align="left"><a href="../edit/${u.id }"><c:out value="${u.lastName }" /></a></td>
+			<td align="center"><a href="../edit/${u.id }"><c:out value="${u.email }" /></a></td>
 			<td align="center">
 				<c:choose>
 					<c:when test="${u.active == 1 }">

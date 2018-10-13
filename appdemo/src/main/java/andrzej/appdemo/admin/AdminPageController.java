@@ -49,7 +49,7 @@ public class AdminPageController {
 		model.addAttribute("totalPages", totalPages);
 		model.addAttribute("currentPage", currentPage + 1);
 		model.addAttribute("userList", userList);
-		model.addAttribute("recordStartCounter", currentPage * ELEMENTS);
+		model.addAttribute("recordStartCounter", currentPage * ELEMENTS);	
 		return "admin/users";
 	}
 	
@@ -57,23 +57,17 @@ public class AdminPageController {
 	@RequestMapping(value = "/admin/users/edit/{id}")
 	@Secured(value = { "ROLE_ADMIN" })
 	public String getUserToEdit(@PathVariable("id") int id, Model model) {
-
 		User user = new User();
 		user = adminService.findUserById(id);
-
 		Map<Integer, String> roleMap = new HashMap<Integer, String>();
 		roleMap = prepareRoleMap();
-				
 		Map<Integer, String> activityMap = new HashMap<Integer, String>();
 		activityMap = prepareActivityMap();
-		
 		int rola = user.getRoles().iterator().next().getId();
 		user.setNrRoli(rola);
-	
 		model.addAttribute("roleMap", roleMap);
 		model.addAttribute("activityMap", activityMap);
 		model.addAttribute("user", user);
-
 		return "admin/useredit";
 	}
 	
@@ -85,6 +79,19 @@ public class AdminPageController {
 		int czyActive = user.getActive();
 		adminService.updateUser(id, nrRoli, czyActive);
 		return "redirect:/admin/users/1";
+	}
+	
+	@GET
+	@RequestMapping(value = "/admin/users/search/{searchWord}")
+	@Secured(value = "ROLE_ADMIN")
+	public String openSearchUsersPage(@PathVariable("searchWord") String searchWord, Model model) {
+		List<User> userList = adminService.findAllSearch(searchWord);
+		for (User users : userList) {
+			int numerRoli = users.getRoles().iterator().next().getId();
+			users.setNrRoli(numerRoli);
+		}
+		model.addAttribute("userList", userList);
+		return "admin/usersearch";
 	}
 
 	// Pobranie listy userów
