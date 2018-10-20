@@ -1,7 +1,5 @@
 package andrzej.appdemo.admin;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,8 +34,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<User> findAllSearch(String param) {
-		List<User> userList = adminRepository.findAllSearch(param);
+	public Page<User> findAllSearch(String param, Pageable pageable) {
+		Page<User> userList = adminRepository.findAllSearch(param, pageable);
 		return userList;
 	}
 

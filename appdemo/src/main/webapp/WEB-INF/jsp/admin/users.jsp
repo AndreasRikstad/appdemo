@@ -8,6 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css" />
 <title><s:message code="menu.users"/></title>
 <script type="text/javascript">
 function changeTrBg(row){
@@ -18,15 +19,15 @@ function defaultTrBg(row){
 	row.style.backgroundColor = "white";
 }
 
-function startSerach(){
+function startSerach(pParam){
 	var searchWord = document.getElementById('searchString').value;
-		
-	if(searchWord.length < 3){
+	var page = parseInt(document.getElementById('cp').value) + parseInt(pParam);
+	if(searchWord.length < 1){
 		document.getElementById("errorSearch").innerHTML = "<s:message code="error.searchString.toShort"/>";
 		return false;
 	} else {
 		document.getElementById("errorSearch").innerHTML = "";
-		var searchLink = '${pageContext.request.contextPath}/admin/users/search/' + searchWord;
+		var searchLink = '${pageContext.request.contextPath}/admin/users/search/' + searchWord + '/' + page;
 		window.location.href=searchLink;
 	}
 }
@@ -34,12 +35,13 @@ function startSerach(){
 </head>
 <body>
 <%@include file="/WEB-INF/incl/menu.app" %>
-<h1><s:message code="menu.users"/></h1>
+<h2><s:message code="menu.users"/></h2>
 <c:set var="licznik" value="${recordStartCounter }"/>
 <div align="center">
 	<div align="right" style="width: 1000px; padding: 2px;">
+		<input type="hidden" name="cp" id="cp" value="${currentPage}"/>
 		<input type="text" id="searchString"/>&nbsp;&nbsp;<input type="button" value="<s:message code="button.search"/>"
-				onclick="startSerach();"/><br/>
+				onclick="startSerach(0);"/><br/>
 		<span id="errorSearch" style="color: red;"></span>
 	</div>
 <table width="1000" border="0" cellpadding="6" cellspacing="2">
