@@ -30,7 +30,7 @@ import andrzej.appdemo.utilities.UserUtilities;
 @Controller
 public class AdminPageController {
 
-	private static int ELEMENTS = 10;
+	private static int ELEMENTS = 20;
 
 	@Autowired
 	private AdminService adminService;
@@ -117,6 +117,7 @@ public class AdminPageController {
 	@RequestMapping(value = "/admin/users/upload")
 	@Secured(value = "ROLE_ADMIN")
 	public String importUsersFromXML(@RequestParam("filename") MultipartFile mFile) {
+
 		String uploadDir = System.getProperty("user.dir") + "/uploads";
 		File file;
 		try {
@@ -128,13 +129,12 @@ public class AdminPageController {
 			Files.write(fileAndPath, mFile.getBytes());
 			file = new File(fileAndPath.toString());
 			List<User> userList = UserUtilities.usersDataLoader(file);
-			for (User u : userList) {
-				System.out.println(u.getEmail() + " > " + u.getName());
-			}
+			//adminService.insertInBatch(userList);
+			adminService.saveAll(userList);
+			file.delete();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return "redirect:/admin/users/1";
 	}
 
