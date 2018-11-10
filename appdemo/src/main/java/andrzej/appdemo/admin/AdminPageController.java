@@ -12,6 +12,8 @@ import java.util.Map;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
@@ -30,6 +32,8 @@ import andrzej.appdemo.utilities.UserUtilities;
 @Controller
 public class AdminPageController {
 
+	private static final Logger LOG = LoggerFactory.getLogger(AdminPageController.class);
+	
 	private static int ELEMENTS = 20;
 
 	@Autowired
@@ -49,6 +53,9 @@ public class AdminPageController {
 	@RequestMapping(value = "/admin/users/{page}")
 	@Secured(value = { "ROLE_ADMIN" })
 	public String openAdminAllUsersPage(@PathVariable("page") int page, Model model) {
+		
+		LOG.info("**** WyWOŁANO > openAdminAllUsersPage(" + page + ", "+ model + ")");
+		
 		Page<User> pages = getAllUsersPageable(page - 1, false, null);
 		int totalPages = pages.getTotalPages();
 		int currentPage = pages.getNumber();
