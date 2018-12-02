@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 
@@ -34,7 +35,7 @@ public class AdminPageController {
 
 	private static final Logger LOG = LoggerFactory.getLogger(AdminPageController.class);
 	
-	private static int ELEMENTS = 20;
+	private static int ELEMENTS = 15;
 
 	@Autowired
 	private AdminService adminService;
@@ -46,6 +47,7 @@ public class AdminPageController {
 	@RequestMapping(value = "/admin")
 	@Secured(value = { "ROLE_ADMIN" })
 	public String openAdminMainPage() {
+		LOG.info("Administracja strona główna");
 		return "admin/admin";
 	}
 
@@ -53,9 +55,6 @@ public class AdminPageController {
 	@RequestMapping(value = "/admin/users/{page}")
 	@Secured(value = { "ROLE_ADMIN" })
 	public String openAdminAllUsersPage(@PathVariable("page") int page, Model model) {
-		
-		LOG.info("**** WyWOŁANO > openAdminAllUsersPage(" + page + ", "+ model + ")");
-		
 		Page<User> pages = getAllUsersPageable(page - 1, false, null);
 		int totalPages = pages.getTotalPages();
 		int currentPage = pages.getNumber();
@@ -144,7 +143,17 @@ public class AdminPageController {
 		}
 		return "redirect:/admin/users/1";
 	}
-
+	
+	@DELETE
+	@RequestMapping(value = "/admin/users/delete/{id}")
+	@Secured(value = "ROLE_ADMIN")
+	public String deleteUser(@PathVariable("id") int id) {
+		LOG.debug("[WYWOŁANIE >>> AdminPageController.deleteUser > PARAMETR: " + id);
+		adminService.deleteUserById(id);
+		return "redirect:/admin/users/1";
+	}
+	
+	// Metody uzytkowe
 	// Pobranie listy userów
 	private Page<User> getAllUsersPageable(int page, boolean search, String param) {
 		Page<User> pages;

@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +24,8 @@ import andrzej.appdemo.user.User;
 @Transactional
 public class AdminServiceImpl implements AdminService {
 
+	private static final Logger LOG = LoggerFactory.getLogger(AdminServiceImpl.class);
+	
 	@Autowired
     private JpaContext jpaContext;
 	
@@ -84,4 +88,14 @@ public class AdminServiceImpl implements AdminService {
 		}
 		adminRepository.saveAll(userList);
 	}
+
+	@Override
+	public void deleteUserById(int id) {
+		LOG.debug("[WYWOŁANIE >>> AdminServiceImpl.deleteUserById > PARAMETR: " + id);
+		LOG.debug("[WYWOŁANIE >>> AdminRepository.deleteUserFromUserRole > PARAMETR: " + id);
+		adminRepository.deleteUserFromUserRole(id);
+		LOG.debug("[WYWOŁANIE >>> AdminRepository.deleteUserFromUser > PARAMETR: " + id);
+		adminRepository.deleteUserFromUser(id);
+	}
+
 }
