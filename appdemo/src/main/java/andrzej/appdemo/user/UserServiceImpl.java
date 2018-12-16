@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void saveUser(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-		user.setActive(1);
+		user.setActive(0);
 		Role role = roleRepository.findByRole("ROLE_USER");
 		user.setRoles(new HashSet<Role>(Arrays.asList(role)));
 		userRepository.save(user);
@@ -41,5 +41,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void updateUserProfile(String newName, String newLastName, String newEmail, int id) {
 		userRepository.updateUserProfile(newName, newLastName, newEmail, id);
+	}
+
+	@Override
+	public void updateUserActivation(int activeCode, String activationCode) {
+		userRepository.updateActivation(activeCode, activationCode);
 	}
 }

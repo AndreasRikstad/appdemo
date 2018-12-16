@@ -30,7 +30,7 @@
 		<appender-ref ref="FILE"/>
 	</root>
 
-	<logger name="org.hibernate" additivity="false" level="INFO">
+	<logger name="org.hibernate" additivity="false" level="DEBUG">
 		<appender-ref ref="FILE"/>
 	</logger>
 	
